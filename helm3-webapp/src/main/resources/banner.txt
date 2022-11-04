@@ -1,0 +1,2 @@
+
+${AnsiStyle.BOLD}${AnsiStyle.ITALIC}${AnsiColor.226}HELM wrapper ${application.formatted-version}/${spring-boot.version}${AnsiColor.DEFAULT}
