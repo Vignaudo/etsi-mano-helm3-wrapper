@@ -11,9 +11,9 @@ public class AuthConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
 		http
-				.authorizeRequests()
-				.antMatchers("/error").permitAll()
-				.mvcMatchers("/**").access("hasAuthority('SCOPE_helm')")
+				.authorizeHttpRequests()
+				.requestMatchers("/error").permitAll()
+				.requestMatchers("/**").hasAnyAuthority("SCOPE_helm")
 				.anyRequest().authenticated()
 				.and()
 				.oauth2ResourceServer()

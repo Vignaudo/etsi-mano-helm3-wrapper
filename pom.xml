@@ -6,8 +6,9 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.0.0</version>
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ubiqube.mano.helm3</groupId>
 	<artifactId>mano-helm3-aggregator</artifactId>
@@ -31,7 +32,7 @@
 	</distributionManagement>
 	<properties>
 		<sonar.jacoco.xmlReportPaths>${project.basedir}/../target/site/jacoco-aggregate/jacoco.xml</sonar.jacoco.xmlReportPaths>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<build>
 		<plugins>
