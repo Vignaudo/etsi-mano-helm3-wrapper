@@ -11,14 +11,24 @@
 	</parent>
 	<groupId>com.ubiqube.mano.helm3</groupId>
 	<artifactId>mano-helm3-aggregator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>mano-helm3-aggregator</name>
 	<description>HELM V3 aggregator module for ETSI-MANO project</description>
-	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>helm3-webapp</module>
 		<module>helm3-api</module>
 	</modules>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://nexus.ubiqube.com:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://nexus.ubiqube.com:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 	<properties>
 		<sonar.jacoco.xmlReportPaths>${project.basedir}/../target/site/jacoco-aggregate/jacoco.xml</sonar.jacoco.xmlReportPaths>
 		<java.version>11</java.version>
