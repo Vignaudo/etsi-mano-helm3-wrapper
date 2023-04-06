@@ -19,8 +19,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import jakarta.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileSystemUtils;
@@ -28,6 +26,8 @@ import org.springframework.util.FileSystemUtils;
 import com.ubiqube.helm.HelmException;
 import com.ubiqube.helm.dto.InstallMessage;
 import com.ubiqube.helm.dto.K8s;
+
+import jakarta.validation.constraints.NotNull;
 
 public class WorkspaceService implements AutoCloseable {
 
@@ -92,8 +92,8 @@ public class WorkspaceService implements AutoCloseable {
 	private static void writeFile(final File target, final String content) {
 		try (FileOutputStream os = new FileOutputStream(target)) {
 			os.write(Base64.getDecoder().decode(content.getBytes()));
-		} catch (final IOException e) {
-			throw new HelmException(e);
+		} catch (final RuntimeException | IOException e) {
+			throw new HelmException("While writing: " + target, e);
 		}
 	}
 

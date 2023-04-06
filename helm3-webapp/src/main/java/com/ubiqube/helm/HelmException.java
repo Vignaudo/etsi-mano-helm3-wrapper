@@ -12,4 +12,8 @@ public class HelmException extends RuntimeException {
 		super(string);
 	}
 
+	public HelmException(final String message, final Throwable e) {
+		super(message, e);
+	}
+
 }
