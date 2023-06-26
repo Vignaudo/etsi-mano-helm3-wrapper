@@ -34,6 +34,12 @@
 		<sonar.jacoco.xmlReportPaths>${project.basedir}/../target/site/jacoco-aggregate/jacoco.xml</sonar.jacoco.xmlReportPaths>
 		<java.version>17</java.version>
 	</properties>
+	<scm>
+		<url>git@github.com:Vignaudo/etsi-mano-helm3-wrapper.git</url>
+		<connection>scm:git:git@github.com:Vignaudo/etsi-mano-helm3-wrapper.git</connection>
+		<developerConnection>scm:git:git@github.com:Vignaudo/etsi-mano-helm3-wrapper.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>
