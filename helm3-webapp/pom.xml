@@ -3,12 +3,12 @@
 	<parent>
 		<groupId>com.ubiqube.mano.helm3</groupId>
 		<artifactId>mano-helm3-aggregator</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 	</parent>
 	<artifactId>helm3-webapp</artifactId>
 	<properties>
 		<java.version>17</java.version>
-		<repackage.classifier/>
+		<repackage.classifier />
 		<spring-cloud.version>2022.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.helm3</groupId>
 			<artifactId>helm3-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
