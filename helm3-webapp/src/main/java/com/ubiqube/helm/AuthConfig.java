@@ -17,23 +17,24 @@
 package com.ubiqube.helm;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
 @EnableWebSecurity
 public class AuthConfig {
 	@SuppressWarnings("static-method")
 	@Bean
 	SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
-		http
-				.authorizeHttpRequests()
-				.requestMatchers("/error").permitAll()
+		http.csrf(CsrfConfigurer::disable);
+		http.authorizeHttpRequests(autorize -> autorize.requestMatchers("/error", "/actuator/**").permitAll()
 				.requestMatchers("/**").hasAnyAuthority("SCOPE_helm")
-				.anyRequest().authenticated()
-				.and()
-				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+				.anyRequest().authenticated());
+		http.oauth2ResourceServer(x -> x.jwt(Customizer.withDefaults()));
 		return http.build();
 	}
 }
