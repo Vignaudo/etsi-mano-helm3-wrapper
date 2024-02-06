@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.ubiqube.mano.helm3</groupId>
 		<artifactId>mano-helm3-aggregator</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>helm3-api</artifactId>
 	<dependencies>
