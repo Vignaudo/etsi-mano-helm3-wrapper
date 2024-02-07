@@ -7,7 +7,7 @@ management:
     metrics:
       export:
         host: http://mano-es:9200
-        index: mano-metrics-vnfm
+        index: mano-metrics-helm3
   endpoint:
     health:
       show-details: ALWAYS
