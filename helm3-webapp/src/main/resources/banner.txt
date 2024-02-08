@@ -5,4 +5,5 @@
 | | | | | | (_| | | | | (_) |     | | | |  __/ | | | | | |.___/ /
 |_| |_| |_|\__,_|_| |_|\___/      |_| |_|\___|_|_| |_| |_|\____/ 
                                                                  
-${AnsiStyle.BOLD}${AnsiStyle.ITALIC}${AnsiColor.226}HELM wrapper ${application.formatted-version}/${spring-boot.version}${AnsiColor.DEFAULT}
+  ${application.title}: ${application.formatted-version}
+  (${AnsiColor.226}Spring boot: ${AnsiStyle.BOLD}${AnsiStyle.ITALIC}${spring-boot.version}${AnsiColor.DEFAULT}${AnsiStyle.NORMAL})
