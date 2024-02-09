@@ -35,6 +35,9 @@ server:
       enabled: false
 
 spring:
+  output:
+    ansi:
+      enabled: always
   security:
     oauth2:
       resourceserver:
