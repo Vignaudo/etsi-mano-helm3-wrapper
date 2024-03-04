@@ -124,8 +124,7 @@ public class WorkspaceService implements AutoCloseable {
 	}
 
 	private static ProcessResult run(final ProcessBuilder builder) {
-		final ExecutorService tp = Executors.newFixedThreadPool(2);
-		try {
+		try (ExecutorService tp = Executors.newFixedThreadPool(2)) {
 			final Process process = builder.start();
 			try (InputStream stdIn = process.getInputStream();
 					InputStream stdErr = process.getErrorStream()) {
