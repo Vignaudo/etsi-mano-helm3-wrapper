@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ubiqube.helm.ExecutionException;
 import com.ubiqube.helm.dto.InstallMessage;
 import com.ubiqube.helm.service.ProcessResult;
 import com.ubiqube.helm.service.WorkspaceService;
@@ -52,9 +53,12 @@ public class HelmV3Controller {
 			ws.pushPayload(is);
 			LOG.info("{}: Call Install ", ws.getId());
 			final ProcessResult res = ws.install();
-			LOG.info("{}: Install done.", ws.getId());
+			LOG.info("{}: Install done. exit code: {}", ws.getId(), res.getExitCode());
 			LOG.info(res.getStdout());
-			LOG.error(res.getErrout());
+			if (res.getExitCode() != 0) {
+				LOG.error(res.getErrout());
+				throw new ExecutionException(res.getExitCode(), res.getErrout());
+			}
 			return ResponseEntity.ok(res.getStdout());
 		}
 	}
