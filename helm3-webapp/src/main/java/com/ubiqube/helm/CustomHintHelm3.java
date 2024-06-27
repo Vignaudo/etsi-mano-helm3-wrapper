@@ -16,16 +16,16 @@
  */
 package com.ubiqube.helm;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
-@ImportRuntimeHints(CustomHintHelm3.class)
-@SpringBootApplication
-public class HelmWebappApplication {
+import jakarta.annotation.Nullable;
 
-	public static void main(String[] args) {
-		SpringApplication.run(HelmWebappApplication.class, args);
+public class CustomHintHelm3 implements RuntimeHintsRegistrar  {
+	@Override
+	public void registerHints(final RuntimeHints hints, final @Nullable ClassLoader classLoader) {
+		hints.resources().registerPattern("config.json");
 	}
+
 
 }
