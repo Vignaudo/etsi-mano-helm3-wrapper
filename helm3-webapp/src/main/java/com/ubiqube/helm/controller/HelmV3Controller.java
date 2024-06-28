@@ -19,9 +19,6 @@ package com.ubiqube.helm.controller;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +34,9 @@ import com.ubiqube.helm.ExecutionException;
 import com.ubiqube.helm.dto.InstallMessage;
 import com.ubiqube.helm.service.ProcessResult;
 import com.ubiqube.helm.service.WorkspaceService;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @SuppressWarnings("static-method")
 @Validated
@@ -72,6 +72,7 @@ public class HelmV3Controller {
 
 	@PostMapping(value = "/uninstall/{name}", consumes = { "multipart/form-data" }, produces = "application/json")
 	public ResponseEntity<String> uninstall(@RequestPart("config") @Valid @NotNull final InstallMessage config, @PathVariable("name") final String name) {
+		LOG.info("Uninstalling: {}", name);
 		try (final WorkspaceService ws = new WorkspaceService(config)) {
 			return ResponseEntity.ok(ws.uninstall(name));
 		}

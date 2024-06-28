@@ -123,13 +123,8 @@ public class WorkspaceService implements AutoCloseable {
 	}
 
 	public ProcessResult install() {
-		final List<String> list = new ArrayList<>();
-		list.add("helm");
+		final List<String> list = getBaseHelmCmd();
 		list.addAll(List.of("-o", "json"));
-		if (LOG.isDebugEnabled()) {
-			list.add("--debug");
-		}
-		list.addAll(List.of("--kubeconfig", "config"));
 		list.add("install");
 		list.add(im.getName());
 		list.add("payload.tgz");
@@ -137,6 +132,16 @@ public class WorkspaceService implements AutoCloseable {
 		final ProcessBuilder builder = new ProcessBuilder(list);
 		builder.directory(wsRoot);
 		return run(builder);
+	}
+
+	private static List<String> getBaseHelmCmd() {
+		final List<String> list = new ArrayList<>();
+		list.add("helm");
+		if (LOG.isDebugEnabled()) {
+			list.add("--debug");
+		}
+		list.addAll(List.of("--kubeconfig", "config"));
+		return list;
 	}
 
 	private static ProcessResult run(final ProcessBuilder builder) {
@@ -172,16 +177,24 @@ public class WorkspaceService implements AutoCloseable {
 	}
 
 	public String list() {
-		final ProcessBuilder builder = new ProcessBuilder(List.of("helm", "list", "-o", "json"));
+		final List<String> list = getBaseHelmCmd();
+		list.add("list");
+		final ProcessBuilder builder = new ProcessBuilder(list);
 		builder.directory(wsRoot);
 		final ProcessResult res = run(builder);
 		return res.getStdout();
 	}
 
 	public String uninstall(final String name) {
-		final ProcessBuilder builder = new ProcessBuilder(List.of("helm", "uninstall", name));
+		final List<String> list = getBaseHelmCmd();
+		list.add("uninstall");
+		list.add(name);
+		final ProcessBuilder builder = new ProcessBuilder(list);
 		builder.directory(wsRoot);
 		final ProcessResult res = run(builder);
+		if (res.getExitCode() != 0) {
+			throw new HelmException(res.getErrout());
+		}
 		return res.getStdout();
 	}
 
