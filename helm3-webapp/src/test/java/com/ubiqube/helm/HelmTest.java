@@ -16,6 +16,8 @@
  */
 package com.ubiqube.helm;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 
 import com.ubiqube.helm.dto.InstallMessage;
@@ -26,7 +28,7 @@ import com.ubiqube.helm.service.WorkspaceService;
 class HelmTest {
 
 	@Test
-	void testName() throws Exception {
+	void testName() {
 		final InstallMessage im = InstallMessage.builder()
 				.k8s(K8s.builder()
 						.apiUrl("api-url")
@@ -41,5 +43,6 @@ class HelmTest {
 						.build())
 				.build();
 		final WorkspaceService ws = new WorkspaceService(im);
+		assertNotNull(ws);
 	}
 }
