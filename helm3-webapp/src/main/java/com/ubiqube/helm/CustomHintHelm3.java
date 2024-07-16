@@ -21,11 +21,10 @@ import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
 import jakarta.annotation.Nullable;
 
-public class CustomHintHelm3 implements RuntimeHintsRegistrar  {
+public class CustomHintHelm3 implements RuntimeHintsRegistrar {
 	@Override
 	public void registerHints(final RuntimeHints hints, final @Nullable ClassLoader classLoader) {
-		hints.resources().registerPattern("config.json");
+		hints.resources().registerPattern("config.yaml");
 	}
-
 
 }
