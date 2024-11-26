@@ -46,7 +46,8 @@ public class HelmV3Controller {
 	private static final Logger LOG = LoggerFactory.getLogger(HelmV3Controller.class);
 
 	@PostMapping(value = "/install", consumes = { "multipart/form-data" }, produces = "application/json")
-	public ResponseEntity<String> install(@RequestPart("config") @Valid @NotNull final InstallMessage config, @RequestParam("file") @NotNull final MultipartFile file) throws IOException {
+	public ResponseEntity<String> install(@RequestPart("config") @Valid @NotNull final InstallMessage config,
+			@RequestParam @NotNull final MultipartFile file, @RequestParam @NotNull final MultipartFile values) throws IOException {
 		try (final WorkspaceService ws = new WorkspaceService(config);
 				InputStream is = file.getInputStream()) {
 			LOG.info("{}: Deploying payload.", ws.getId());
@@ -71,7 +72,7 @@ public class HelmV3Controller {
 	}
 
 	@PostMapping(value = "/uninstall/{name}", consumes = { "multipart/form-data" }, produces = "application/json")
-	public ResponseEntity<String> uninstall(@RequestPart("config") @Valid @NotNull final InstallMessage config, @PathVariable("name") final String name) {
+	public ResponseEntity<String> uninstall(@RequestPart("config") @Valid @NotNull final InstallMessage config, @PathVariable final String name) {
 		LOG.info("Uninstalling: {}", name);
 		try (final WorkspaceService ws = new WorkspaceService(config)) {
 			return ResponseEntity.ok(ws.uninstall(name));
